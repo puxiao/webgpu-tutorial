@@ -271,8 +271,8 @@ const device = await adapter.requestDevice()
 | createCommandEncoder(descriptor?: GPUCommandEncoderDescriptor): GPUCommandEncoder | 创建GPUCommandEncoder命令编码          |
 | createRenderBundleEncoder(descriptor: GPURenderBundleEncoderDescriptor): GPURenderBundleEncoder | 创建GPURenderBundleEncoder渲染束编码   |
 | createQuerySet(descriptor: GPUQuerySetDescriptor): GPUQuerySet | 创建GPUQuerySet查询结果集              |
-| pushErrorScope(filter: GPUErrorFilter): undefined            | 向队尾添加一个错误范围                 |
-| popErrorScope(): Promise<GPUError \| null>                   | 从队尾删除一个错误范围                 |
+| pushErrorScope(filter: GPUErrorFilter): undefined            | 向堆栈添加一个错误                     |
+| popErrorScope(): Promise<GPUError \| null>                   | 从堆栈删除一个错误                     |
 
 > 以上很多方法涉及的对象还没有具体学习，所以个别翻译和解释可能不准确。
 
