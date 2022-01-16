@@ -224,7 +224,7 @@ const device = await adapter.requestDevice()
 
    请注意，尽管我们可以这样添加参数，以希望得到不同的显卡设备，但是这个前提是我们的系统中本身就包含不同的显卡设备。
 
-   假设我的电脑系统中只有集成显卡，就没有独立显卡，那么此时即使我们添加有参数 `{ powerPreference: 'high-performance' }`，但是 GPUAdapter(显卡适配器) 依然会返回的是 集成显卡。
+   假设我的电脑系统中只有集成显卡，根本没有独立显卡，那么此时即使我们添加有参数 `{ powerPreference: 'high-performance' }`，但是 GPUAdapter(显卡适配器) 依然会返回的是 集成显卡。
 
 
 
