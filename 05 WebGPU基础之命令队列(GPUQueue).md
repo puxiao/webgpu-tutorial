@@ -36,7 +36,7 @@ GPUQueue 中的 Queue 单词本意就是队列，并且它就是 数据结构 �
 
 <br>
 
-所谓 `队列的特点：先进先出`，就是 **GPUQueue 作为命令队列，会严格按照命令的添加顺序逐条执行**。
+所谓 `队列的特点：先进先出`，就是 **GPUQueue 作为命令队列，会严格按照命令的添加顺序逐条提交执行**。
 
 
 
@@ -79,7 +79,7 @@ GPUQueue 只可以通过 GPUDevice 实例的 .queue 属性来获取。
 
 <br>
 
-如果我们简单得把 GPUAdapter 看作是 浏览器与 GPUDevice 的沟通桥梁，那么 GPUQueue 就是 GPUDevice 与 GPUBuffer 的沟通桥梁。
+如果我们简单的把 GPUAdapter 看作是 浏览器与 GPUDevice 的沟通桥梁，那么 GPUQueue 就是 GPUDevice 与 GPUBuffer 的沟通桥梁。
 
 关于 GPUBuffer(显存缓冲区) 我们会在下一篇文章中讲解。
 
@@ -106,8 +106,6 @@ GPUQueue 只可以通过 GPUDevice 实例的 .queue 属性来获取。
 > 特别强调：在解释内存和显存时，使用的词语是 “运算数据”，不是 “运算结果”。
 >
 > 也就是说 **GPUBuffer 对应的数据可能是供 GPU 运算的一些数据，不是 GPU 运算结果**。
->
-> 
 >
 > 至此，对 GPUBuffer 应该有了一个简单的概念，那么我们可以回到本文关于 GPUQueue 的学习中。
 
