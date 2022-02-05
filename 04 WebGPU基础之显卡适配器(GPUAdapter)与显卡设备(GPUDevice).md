@@ -256,7 +256,7 @@ const device = await adapter.requestDevice()
 | 方法                                                         | 对应作用                               |
 | ------------------------------------------------------------ | -------------------------------------- |
 | destroy()                                                    | 销毁当前对象                           |
-| createBuffer(descriptor: GPUBufferDescriptor): GPUBuffer     | 创建GPUBuffer缓存实例                  |
+| createBuffer(descriptor: GPUBufferDescriptor): GPUBuffer     | 创建GPUBuffer缓冲区实例                |
 | createTexture(descriptor: GPUTextureDescriptor): GPUTexture  | 创建GPUTexture纹理实例                 |
 | createSampler(descriptor?: GPUSamplerDescriptor): GPUSampler | 创建GPUSampler采样器实例               |
 | importExternalTexture(descriptor: GPUExternalTextureDescriptor): GPUExternalTexture | 导入外部纹理                           |
