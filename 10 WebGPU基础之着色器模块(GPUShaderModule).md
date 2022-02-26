@@ -167,7 +167,7 @@ SPIR-V 是 Vulkan 使用的着色器语言。
 
 > Vulkan 是 科纳斯组织(Khronos Group) 推出的一个跨平台 2D 和 3D 绘图应用程序接口(API)。
 >
-> 你可以简单得把 Vulkan 看作是用来取代 OpenGL 的。
+> 你可以简单的把 Vulkan 看作是用来取代 OpenGL 的。
 >
 > Vulkan 是 WebGPU 所支持的 3 大底层架构(DirectX 12、Metal、Vulkan)之一。
 
@@ -345,11 +345,13 @@ interface GPUCompilationMessage {
 
 **lineNum**：警告或错误信息所对应的代码行号
 
-**linePos**：警告或错误信息所对应的具体代码字符
+**linePos**：警告或错误信息所对应的具体字符位置
 
-**offset**：发生消息的着色器代码中从开头到错误的位置偏移数
+**offset**：发生消息的代码从开头到错误的位置的总体偏移数
 
 **length**：发生消息的代码单元数量
+
+
 
 > 对于我们而言 lineNum 和 linePos 已足够我们定位到代码的位置了。
 
