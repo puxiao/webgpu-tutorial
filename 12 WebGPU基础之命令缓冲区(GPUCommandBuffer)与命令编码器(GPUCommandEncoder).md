@@ -26,7 +26,7 @@
 
 > 关于 指令 百度百科的解释为：
 >
-> 指令是指示计算机执行某种操作的命令。它由一串二进制数码(0)组成。  
+> 指令是指示计算机执行某种操作的命令。它由一串二进制数码(0或1)组成。  
 > 一条指令通常由两个部分组成：操作码+地址码。  
 > 操作码：指明该指令要完成的操作的类型或性质，如取数、做加法或输出数据等。  
 > 地址码：指明操作对象的内容或所在的存储单元地址。
@@ -55,7 +55,7 @@
 
 <br>
 
-请注意：GPUCommandBuffer 本身无法通过 new 或 GPUDevice.createXxxx() 这种形式进行创建实例化，它的实例化是由 GPUCommandEncoder 创建的。
+请注意：GPUCommandBuffer 本身无法通过 new 或 GPUDevice.createXxxx() 这种形式进行创建实例化，它的实例化是由 GPUCommandEncoder 实例的 .finish() 创建得到的。
 
 
 
@@ -309,7 +309,7 @@ clearBuffer(
 ): undefined;
 ```
 
-> 本文开头提到了 百度百科中 关于 指令 的解释，其中说到 指令 是由二进制数据构成的，那么所谓的 清空 也就是指将所有位数上的值都修改成 0。
+> 本文开头提到了 百度百科中 关于 指令 的解释，其中说到 指令 是由二进制数据(0或1)构成的，那么所谓的 清空 就是指将所有位数上的值都修改成 0。
 
 
 
@@ -350,7 +350,7 @@ resolveQuerySet(
 
 **finish()**：结束当前命令编码器的录入状态，换句话说就是 告知当前命令编码器 “全部的待编码命令已录入完成”，该方法会返回一个 命令缓冲区(GPUCommandBuffer)。
 
-当调用过 finish() 方法后，该命令编码器就不能再使用了。
+当调用过 finish() 方法后，当前的 GPUCommandEncoder 实例已完成它的使命，此后该命令编码器就不能再使用了。
 
 ```
 finish(
@@ -389,7 +389,7 @@ const queue = device.queue.submit([commandBuffer])
 
 <br>
 
-**重点回顾：**
+**划重点：**
 
 命令编码器(GPUCommandEncoder) 的 .beginRenderPass() 和 .beginComputePass() 会分别返回一个 计算通道编码器(GPURenderPassEncoder)、计算通道编码器(GPUComputePassEncoder)
 
