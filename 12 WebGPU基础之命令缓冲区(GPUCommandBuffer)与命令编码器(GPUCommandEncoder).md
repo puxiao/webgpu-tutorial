@@ -391,7 +391,7 @@ const queue = device.queue.submit([commandBuffer])
 
 **划重点：**
 
-命令编码器(GPUCommandEncoder) 的 .beginRenderPass() 和 .beginComputePass() 会分别返回一个 计算通道编码器(GPURenderPassEncoder)、计算通道编码器(GPUComputePassEncoder)
+命令编码器(GPUCommandEncoder) 的 .beginRenderPass() 和 .beginComputePass() 会分别返回一个 渲染通道编码器(GPURenderPassEncoder)、计算通道编码器(GPUComputePassEncoder)
 
 
 
@@ -399,6 +399,6 @@ const queue = device.queue.submit([commandBuffer])
 
 关于 WebGPU 中命令相关的编码器，我们先讲到这里，本文到此结束。
 
-接下来将具体学习 计算通道编码器(GPURenderPassEncoder) 和 计算通道编码器(GPUComputePassEncoder)。
+接下来将具体学习 渲染通道编码器(GPURenderPassEncoder) 和 计算通道编码器(GPUComputePassEncoder)。
 
 
