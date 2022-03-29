@@ -115,7 +115,7 @@ setBindGroup(
 ): undefined;
 ```
 
-可以看出前两个参数是相同的，却别在于剩余参数，即以哪种形式来定义绑定组中数据的偏移量。
+可以看出前两个参数是相同的，区别在于剩余参数，即以哪种形式来定义绑定组中数据的偏移量。
 
 
 
@@ -455,7 +455,7 @@ setViewport(
 
 **setScissorRect()：设置在光栅化阶段使用的裁剪矩形**
 
-当转换为视口坐标后，任何出在剪裁矩形以外的片元都将被丢弃。
+当转换为视口坐标后，任何处在剪裁矩形以外的片元都将被丢弃。
 
 ```
 setScissorRect(
@@ -520,7 +520,7 @@ endOcclusionQuery(): undefined;
 
 以下是和 **绑定** 相关的方法：
 
-**executeBundles()：执行前先记录到给定 渲染绑定束(GPURenderBundle) 集合中的命令，作为此渲染通道的一部分**
+**executeBundles()：执行前先记录到给定 渲染包(GPURenderBundle) 集合中的命令，作为此渲染通道的一部分**
 
 ```
 executeBundles(
