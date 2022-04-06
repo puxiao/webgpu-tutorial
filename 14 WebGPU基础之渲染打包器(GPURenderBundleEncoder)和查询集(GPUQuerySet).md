@@ -402,5 +402,5 @@ const querySet = device.createQuerySet({
 
 <br>
 
-本文到此结束，接下来，我们再学习最后一个模块：画布渲染，就可以完成 WebGPU 基础阶段的全部内容了。
+本文到此结束，接下来，我们再学习最后一个模块：GPU画布上下文(GPUCanvasContext)
 

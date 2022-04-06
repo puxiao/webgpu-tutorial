@@ -263,7 +263,7 @@ createBuffer(descriptor: GPUBufferDescriptor): GPUBuffer
 
 
 
-> 补充：目前 `@webgpu\types` 最新版为 0.1.11  
+> 补充：目前 `@webgpu/types` 最新版为 0.1.11  
 >
 > 再次强调一遍：本教程中关于类、属性和方法中的介绍都是指 `在 TypeScript 中开发 WebGPU ，由 @webgpu/types 定义的`，而不是指原生的 WebGPU。
 >
