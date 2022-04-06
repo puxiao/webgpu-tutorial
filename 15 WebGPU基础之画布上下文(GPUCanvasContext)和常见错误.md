@@ -141,115 +141,127 @@ interface GPUCanvasConfiguration {
 
 下面逐个介绍一下各个配置项。
 
-1. **device**：与此画布上下文关联的 GPU设备(GPUDevice)
+**device**：与此画布上下文关联的 GPU设备(GPUDevice)
 
-   > 注：我个人把 GPUDevice 翻译为 显卡设备，但实际上我们清除这个 “设备” 并不真的是系统的 GPU 硬件设备，而是 WebGPU 为了适配不同 GPU 而做出来的一个 “虚构” 的设备。
+> 注：我个人把 GPUDevice 翻译为 显卡设备，但实际上我们知道这个 “设备” 并不真的是系统的 GPU 硬件设备，而是 WebGPU 为了适配不同 GPU 而做出来的一个 “虚构” 的设备。
 
-   > 我看某个人的文章，他把 GPUDevice 翻译为 “GPU驱动”... 额，无论翻译成什么，你明白其中含义即可。
+> 我看某个人的文章，他把 GPUDevice 翻译为 “GPU驱动”... 额，无论翻译成什么，你明白其中含义即可。
 
-2. **format**：设定 纹理(实际)格式，一般情况下我们都会将其设置为系统首选纹理格式
+**format**：设定 纹理(实际)格式，一般情况下我们都会将其设置为系统首选纹理格式
 
-   ```
-   const textformat = ctx.getPreferredFormat(adapter) //先得到首选纹理格式
-   
-   //将首选纹理格式作为 画布上下文 的纹理配置参数值
-   ctx.configure({
-       ...
-       textform
-       ...
-   })
-   ```
+```
+const textformat = ctx.getPreferredFormat(adapter) //先得到首选纹理格式
 
-3. **usage**：纹理用途(usage)，默认为 0x10，表明是用作颜色附件的
+//将首选纹理格式作为 画布上下文 的纹理配置参数值
+ctx.configure({
+    ...
+    textform
+    ...
+})
+```
 
-4. **viewFormats**：设定纹理 除了实际格式(format)以外，调用 createView() 时其他被允许的格式
+**usage**：纹理用途(usage)，默认为 0x10，表明是用作颜色附件的
 
-5. **colorSpace**：画布的颜色空间，该值目前只支持 "srgb"
+**viewFormats**：设定纹理 除了实际格式(format)以外，调用 createView() 时其他被允许的格式
 
-6. **compositingAlphaMode**：合成到画布上的透明选项，默认为 “opaque” 即 不透明
+**colorSpace**：画布的颜色空间，该值目前只支持 "srgb"
 
-   ```
-   type GPUCanvasCompositingAlphaMode = "opaque" | "premultiplied";
-   ```
+**compositingAlphaMode**：合成到画布上的透明选项，默认为 “opaque” 即 不透明
 
-   > "opaque" 表示不透明，会忽略 alpha 原有的值，换句话说相当于把 alpha 的值全部设置为 1
-   >
-   > "premultiplied" 表示 颜色透明度预乘
-   >
-   > 假设原有颜色值为 src，最终颜色值为 dst，那么 预乘 需要满足的公式为：
-   >
-   > `|dst.rgb = src.rgb + dst.rgb*(1-src.a)|`
-   >
-   > 注：上面颜色的 4 个分量 r g b a 他们的取值范围都是 0 ~ 1
+```
+type GPUCanvasCompositingAlphaMode = "opaque" | "premultiplied";
+```
 
-   <br>
 
-   > 以下内容来源于 `LaoYuanPython` 的一篇文章：图像处理术语解释：什么是PRGBA和Alpha预乘（Premultiplied Alpha ）
-   >
-   > https://blog.csdn.net/LaoYuanPython/article/details/106772363
 
-   <br>
+<br>
 
-   > **名词解释：alpha预乘**
-   >
-   > 对于 4 通道 rgba 格式的图像(颜色)在合成时存在 2 个问题：
-   >
-   > 1. 在图像合成时需要对 r g b 通道应用 alpha 通道 ，这会造成 合成 时处理压力较大
-   > 2. 在图像合成时可能需要进行 插值处理，但一般的插值计算都只是在 r g b 这 3 个通道中进行的，而带有 alpha 通道的图像的 r g b 并不是最终的 r g b 颜色
-   >
-   > 为了解决这个问题，在 图像处理 过程中引入了 预乘(premultiplied) 这个概念，经过预乘处理的图片格式称为 prgba。保存的数据通常称为(ar,ag,ab,a)，这样即保存了真正展现时的像素 rgb 值，又保存了 alpha 通道值。
-   >
-   > 由于 预乘 计算后保存的值是整数，会丢失小数点后的数值，因此会存在偏差，其中当 r g b 的值很小但 alpha 的值很大时，该误差会比较大。
-   >
-   > 注：这里说的 “保存的值是整数” 应该是指 0 - 255。
+> "opaque" 表示不透明，会忽略 alpha 原有的值，换句话说相当于把 alpha 的值全部设置为 1
+>
+> "premultiplied" 表示 颜色透明度预乘
+>
+> 假设原有颜色值为 src，最终颜色值为 dst，那么 预乘 需要满足的公式为：
+>
+> `|dst.rgb = src.rgb + dst.rgb*(1-src.a)|`
+>
+> 注：上面颜色的 4 个分量 r g b a 他们的取值范围都是 0 ~ 1
 
-   > 关于 预乘 在 WebGPU 官方文档中有这样一句话：颜色值(rgb) 应该小于或等于他们的 alpha 值。例如 [1.0,0,0,0.5] 是 “超亮”，无法可靠显示。
 
-7. **size**：画布的像素点数量
 
-   ```
+<br>
+
+> 以下内容来源于 `LaoYuanPython` 的一篇文章：图像处理术语解释：什么是PRGBA和Alpha预乘（Premultiplied Alpha ）
+>
+> https://blog.csdn.net/LaoYuanPython/article/details/106772363
+
+
+
+<br>
+
+> **名词解释：alpha预乘**
+>
+> 对于 4 通道 rgba 格式的图像(颜色)在合成时存在 2 个问题：
+>
+> 1. 在图像合成时需要对 r g b 通道应用 alpha 通道 ，这会造成 合成 时处理压力较大
+>
+> 2. 在图像合成时可能需要进行 插值处理，但一般的插值计算都只是在 r g b 这 3 个通道中进行的，而带有 alpha 通道的图像的 r g b 并不是最终的 r g b 颜色
+>
+> 为了解决这个问题，在 图像处理 过程中引入了 预乘(premultiplied) 这个概念，经过预乘处理的图片格式称为 prgba。保存的数据通常称为(ar,ag,ab,a)，这样即保存了真正展现时的像素 rgb 值，又保存了 alpha 通道值。
+>
+> 由于 预乘 计算后保存的值是整数，会丢失小数点后的数值，因此会存在偏差，其中当 r g b 的值很小但 alpha 的值很大时，该误差会比较大。
+>
+
+> 关于 预乘 在 WebGPU 官方文档中有这样一句话：颜色值(rgb) 应该小于或等于他们的 alpha 值。例如 [1.0,0,0,0.5] 是 “超亮”，无法可靠显示。
+
+
+
+<br>
+
+**size**：画布的像素点数量
+
+```
 size?: GPUExtent3D;
-   
-   type GPUExtent3D = Iterable<GPUIntegerCoordinate> | GPUExtent3DDict;
-   
-   type GPUIntegerCoordinate = number;
-   
-   interface GPUExtent3DDict {
-       width: GPUIntegerCoordinate;
-       height?: GPUIntegerCoordinate;
-       depthOrArrayLayers?: GPUIntegerCoordinate;
-   }
-   ```
-   
-   你可以有 2 种设置 size 的方式：
 
-   > 注：这里说的画布宽高是指 canvas 元素实际的宽高，而不是指通过 css 控制画布的宽高
+type GPUExtent3D = Iterable<GPUIntegerCoordinate> | GPUExtent3DDict;
 
-   ```
+type GPUIntegerCoordinate = number;
+
+interface GPUExtent3DDict {
+    width: GPUIntegerCoordinate;
+    height?: GPUIntegerCoordinate;
+    depthOrArrayLayers?: GPUIntegerCoordinate;
+}
+```
+
+你可以有 2 种设置 size 的方式：
+
+> 注：这里说的画布宽高是指 canvas 元素实际的宽高，而不是指通过 css 控制画布的宽高
+
+```
 {
-       /** size: [canvas.clientWidth, canvas.clientHeight] */
-       size: [400, 300]
-   }
-   
-   //或者
-   
-   {
-       size: {
-           width: canvas.clientWidth,
-           height: canvas.clientHeight
-       }
-   }
-   ```
-   
-   对于高清屏，那么可能需要将上述代码中 画布的宽高对应的像素数量 修改为：
+    /** size: [canvas.clientWidth, canvas.clientHeight] */
+    size: [400, 300]
+}
 
-   ```diff
-   - canvas.clientWidth
-   + canvas.clientWidth * window.devicePixelRatio
-   
-   - canvas.clientHeight
-   + canvas.clientHeight * window.devicePiexRatio
-   ```
+//或者
+
+{
+    size: {
+        width: canvas.clientWidth,
+        height: canvas.clientHeight
+    }
+}
+```
+
+对于高清屏，那么可能需要将上述代码中 画布的宽高对应的像素数量 修改为：
+
+```diff
+- canvas.clientWidth
++ canvas.clientWidth * window.devicePixelRatio
+
+- canvas.clientHeight
++ canvas.clientHeight * window.devicePiexRatio
+```
 
 
 
@@ -263,9 +275,9 @@ size?: GPUExtent3D;
 
 <br>
 
-当每次通过 .configure() 修改画布上下文配置后，会立即销毁之前 配置 而产生的纹理。
+当每次通过 .configure() 修改画布上下文配置后，都会立即销毁之前 配置 所产生的纹理。
 
-> 再次提醒：GPUCanvasContext 仅仅相当于 WebGPU 中的一个 纹理。
+> 再次提醒：GPUCanvasContext 仅仅相当于 WebGPU 中的一个特殊纹理。
 
 
 
@@ -322,6 +334,10 @@ interface GPUDeviceLostInfo {
 
 type GPUDeviceLostReason = "destroyed";
 ```
+
+
+
+<br>
 
 我们可以向 GPUDevice 实例的 .lost 添加错误侦听。
 
