@@ -244,15 +244,11 @@ size?: GPUExtent3D;
    对于高清屏，那么可能需要将上述代码中 画布的宽高对应的像素数量 修改为：
 
    ```diff
-   
-   ```
-- canvas.clientWidth
+   - canvas.clientWidth
    + canvas.clientWidth * window.devicePixelRatio
    
    - canvas.clientHeight
    + canvas.clientHeight * window.devicePiexRatio
-   ```
-   
    ```
 
 
@@ -335,7 +331,7 @@ device.lost.catch((err) => {
 })
 ```
 
-> GPU 都是是最致命的错误。若系统 GPU 都突然不可用了，那还搞什么 WebGPU
+> GPU 丢失属于致命性的错误。若系统 GPU 都突然不可用了，那还搞什么 WebGPU。
 
 
 
