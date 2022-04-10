@@ -317,7 +317,7 @@ import xxx from './wgsl/xx.wgsl?raw'
 
 <br>
 
-#### 第6步：安装谷歌开发版浏览器(Chrome Canar)
+#### 第6步：安装谷歌开发版浏览器(Chrome Canary)
 
 目前 WebGPU 并未正式发布，所以我们只能运行在 开发版 的浏览器中。
 
