@@ -190,6 +190,20 @@ type GPUCanvasCompositingAlphaMode = "opaque" | "premultiplied";
 
 <br>
 
+> 特别补充：在较早之前 compositingAlphaMode 的默认值是 “premultiplied”，而不是现在的 "opaque"。
+>
+> 对于目前而言(谷歌浏览器 102 版本)，如果你没有明确配置 compositingAlphaMode 的值，那么在浏览器调试时会收到一个警告信息：
+>
+> ```
+> The default GPUCanvasCompositingAlphaMode will change from "premultiplied" to "opaque". Please explicitly pass "premultiplied" if you would like to continue using that compositing mode.
+> ```
+>
+> 尽管我们知道其默认值已经是 "opaque" 了，但是在配置画布上下文时，还是选择主动加上 `compositingAlphaMode: 'opaque'`，就可以消除这句警告信息了。
+
+
+
+<br>
+
 > 以下内容来源于 `LaoYuanPython` 的一篇文章：图像处理术语解释：什么是PRGBA和Alpha预乘（Premultiplied Alpha ）
 >
 > https://blog.csdn.net/LaoYuanPython/article/details/106772363
