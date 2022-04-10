@@ -14,7 +14,7 @@
 
 <br>
 
-> 其实原本计划本篇就开始讲解如何绘制三角形，但是想了想，觉得有必要先把 前端项目环境配置讲解清楚。
+> 其实原本计划本篇就开始讲解如何绘制三角形，但是想了想，觉得有必要先把 前端项目环境配置 讲解清楚。
 >
 > 后面我们所有编写的 WebGPU 示例都将在这个项目背景中进行。
 
@@ -94,7 +94,7 @@ root.render(
 )
 ```
 
-> 或许不久之 create-react-app 升级完全适配 react18 后就不需要这一步操作了。
+> 或许不久之后 create-react-app 升级完全适配 react18 后就不需要这一步操作了。
 
 
 
@@ -118,7 +118,7 @@ yarn add @webgpu/types
 
 1. 修改 target 将 es5 改为 esnext
 2. 添加 typeRoots 配置
-3. 增加 alias 对应的 paths 配置
+3. 增加 alias(路径别名) 对应的 paths 配置
 
 ```diff
 {
@@ -225,7 +225,7 @@ declare module '*.wgsl' {
 > 这里我们也顺道配置一下 alias
 
 ```
-//craco.config.js
+//craco.config.ts
 
 import path from 'path'
 module.exports = {
@@ -283,7 +283,7 @@ module.exports = {
 import xxx from './wgsl/xx.wgsl?raw'
 ```
 
-> raw 这个但是本身翻译为 生肉，实际上就是指 “未经处理” 的原始数据
+> raw 这个词是本身翻译为 生肉，实际上就是指 “未经处理” 的原始数据
 
 > vite  还有其他支持的参数：?import、?html-proxy、?worker、?shareworker、?url ，具体含义本文不做过多介绍。
 
