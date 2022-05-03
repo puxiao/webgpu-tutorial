@@ -6,7 +6,7 @@
 
 <br>
 
-![GPUQueue](https://puxiao.com/webgpu_tutorial/imgs/gpu_queue.jpg)
+![GPUQueue](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/gpu_queue.jpg)
 
 
 

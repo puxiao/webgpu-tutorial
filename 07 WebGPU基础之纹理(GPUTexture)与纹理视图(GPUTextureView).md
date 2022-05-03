@@ -139,7 +139,7 @@ mipmap 核心思想为：近似的正方形范围查询。
 
 在计算机视觉 或 图形学中会将这种策略称为：图像金字塔
 
-<img src="https://puxiao.com/webgpu_tutorial/imgs/mipmap.jpg" alt="mipmap" style="zoom:80%;" />
+<img src="https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/mipmap.jpg" alt="mipmap" style="zoom:80%;" />
 
 
 

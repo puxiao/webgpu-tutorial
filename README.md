@@ -145,7 +145,7 @@ Github：https://github.com/puxiao
 
 微信：78657141(同QQ)
 
-![](https://puxiao.com/webgpu_tutorial/imgs/me_qrcode01.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/me_qrcode01.jpg)
 
 
 
@@ -157,7 +157,7 @@ Github：https://github.com/puxiao
 
 > 目前还真的没有其他公众号专注于 WebGPU，所以这个名称我就申请到了。
 
-![](https://puxiao.com/webgpu_tutorial/imgs/me_qrcode02.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/me_qrcode02.jpg)
 
 <br>
 

@@ -51,7 +51,7 @@ GPU 是单词 graphics processing unit 的缩写，中文通常会被翻译为�
 
 
 
-![](https://puxiao.com/webgpu_tutorial/imgs/webgpu_logo.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/webgpu_logo.jpg)
 
 
 
@@ -145,7 +145,7 @@ WebGPU 必须可以同时兼容 D3D12(微软)、Metal(苹果)、Vulkan(Khronos) 
 
 你的程序(浏览器网页) > WebGPU API > 系统平台(OS) > { DirectX 12、Metal、Vulkan }
 
-![](https://puxiao.com/webgpu_tutorial/imgs/webgpu_architecture_diagram.png)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/webgpu_architecture_diagram.png)
 
 > 图片来源：https://web.dev/gpu/
 

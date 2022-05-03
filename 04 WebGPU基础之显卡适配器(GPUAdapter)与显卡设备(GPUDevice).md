@@ -35,7 +35,7 @@
 
 我们先看一张图，来梳理 GPUAdapter、GPUDevice、浏览器 之间的关系。
 
-![adapter_device](https://puxiao.com/webgpu_tutorial/imgs/adapter_device.jpg)
+![adapter_device](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/adapter_device.jpg)
 
 他们的逻辑关系为：
 

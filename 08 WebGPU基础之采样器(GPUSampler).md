@@ -41,7 +41,7 @@
 3. clamp：钳位模式，当 UV 坐标超出 0-1 范围后，将结束位置的最后一个纹素作为剩余的纹素
 4. border：边框模式，当 UV 坐标超出 0-1 范围后，将某个固定颜色作为剩余的纹素
 
-![](https://puxiao.com/webgpu_tutorial/imgs/sampler_uv.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/sampler_uv.jpg)
 
 
 
@@ -68,7 +68,7 @@
 3. bilinear：双线性插值
 4. bicubic：双三次插值
 
-![](https://puxiao.com/webgpu_tutorial/imgs/sampler_filter.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/sampler_filter.jpg)
 
 
 
@@ -80,7 +80,7 @@
 
 在 PS 中将一个高宽均为 100 像素的图片 拉伸到 200像素，可以看到也遵循相同的 “采样” 选项。
 
-![](https://puxiao.com/webgpu_tutorial/imgs/sampler_filter_ps.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/sampler_filter_ps.jpg)
 
 
 

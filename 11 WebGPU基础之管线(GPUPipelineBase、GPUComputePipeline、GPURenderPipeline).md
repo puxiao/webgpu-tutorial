@@ -70,7 +70,7 @@
 
 **渲染管线流程图：**
 
-![pipeline](https://puxiao.com/webgpu_tutorial/imgs/pipeline.jpg)
+![pipeline](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/pipeline.jpg)
 
 
 

@@ -201,7 +201,7 @@
 
 > 这只是我目前的理解，不敢保证一定正确。
 
-![GPUBuffer](https://puxiao.com/webgpu_tutorial/imgs/gpubuffer.jpg)
+![GPUBuffer](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/gpubuffer.jpg)
 
 <br>
 
@@ -490,4 +490,4 @@ GPUBuffer 基础知识搞明白之后，后期我们再进行大量实际例子�
 >
 > 他们管理员的微信二维码：
 >
-> <img src="https://puxiao.com/webgpu_tutorial/imgs/orillusion_qr.jpg" style="zoom: 67%;" />
+> <img src="https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/orillusion_qr.jpg" style="zoom: 67%;" />

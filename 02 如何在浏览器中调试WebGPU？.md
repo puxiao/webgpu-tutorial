@@ -18,7 +18,7 @@
 
 #### 各大浏览器的开发版长什么样子？
 
-![](https://puxiao.com/webgpu_tutorial/imgs/browser_dev.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/browser_dev.jpg)
 
 上图中，左侧为浏览器对应的开发版图标，右侧为标准版。
 
@@ -60,7 +60,7 @@ Eged：https://www.microsoftedgeinsider.com/en-us/download
 
 第2步：在打开的页面中，搜索 "webgpu"，找到 `Unsafe WebGPU`，将其设置为 `Enabled`。
 
-![](https://puxiao.com/webgpu_tutorial/imgs/unsafe_webgpu.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/unsafe_webgpu.jpg)
 
 > 那段英文的翻译为：
 >
@@ -84,7 +84,7 @@ console.log(navigator.gpu)
 
 如果输出有值 `GPU`，即证明此时浏览器已可以使用 WebGPU 了。
 
-![](https://puxiao.com/webgpu_tutorial/imgs/navigator_gpu.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/navigator_gpu.jpg)
 
 <br>
 
@@ -170,7 +170,7 @@ https://austin-eng.com/webgpu-samples/samples/helloTriangle
 
 如果你能看到红色三角形，则表示你的浏览器已开启 WebGPU。
 
-![](https://puxiao.com/webgpu_tutorial/imgs/helloTriangle.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/helloTriangle.jpg)
 
 > 我的微信公众号：WebGPU 的 logo 就源于这个红色三角图形。
 
@@ -213,7 +213,7 @@ Chrome 特别希望你在开发测试 WebGPU 的过程中，将一些使用感�
 
 打开之后，页面如图：
 
-![](https://puxiao.com/webgpu_tutorial/imgs/trial_token1.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/trial_token1.jpg)
 
 点击 `REGISTER` 按钮，继续下一步。
 
@@ -225,7 +225,7 @@ Chrome 特别希望你在开发测试 WebGPU 的过程中，将一些使用感�
 
 > 下半截那些选项几乎都是 Chrome 的免责条款。告诉你 WebGPU 处于内测阶段，若发生什么未知意外还请您多担待。
 
-![](https://puxiao.com/webgpu_tutorial/imgs/trial_token2.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/trial_token2.jpg)
 
 点击 “REGISTER” 继续下一步。
 
@@ -233,7 +233,7 @@ Chrome 特别希望你在开发测试 WebGPU 的过程中，将一些使用感�
 
 申请成功后，你会看到这样的一个结果页：
 
-![](https://puxiao.com/webgpu_tutorial/imgs/trial_token3.jpg)
+![](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/trial_token3.jpg)
 
 > 这个是我之前申请时候的结果页
 

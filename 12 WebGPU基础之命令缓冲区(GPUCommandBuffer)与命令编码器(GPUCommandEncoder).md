@@ -55,7 +55,7 @@
 
 <br>
 
-![GPUCommandEncoder](https://puxiao.com/webgpu_tutorial/imgs/gpu_command_encoder.jpg)
+![GPUCommandEncoder](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/gpu_command_encoder.jpg)
 
 
 
