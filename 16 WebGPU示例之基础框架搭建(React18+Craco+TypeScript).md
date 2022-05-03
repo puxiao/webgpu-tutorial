@@ -24,7 +24,7 @@
 
 #### 第1步：使用 create-react-app 创建一个 React18 项目
 
-我使用的是 create-react-app 5.0.0 这个版本，相对于 4.x.x 版本，它的不同之处在于：
+我使用的是 create-react-app 5.0.1 这个版本，相对于 4.x.x 版本，它的不同之处在于：
 
 1. 它创建的项目是基于 webpack5 编译项目，而不是 webpack4
 2. 它默认会安装最新版的 react，而目前最新版的 react 就是 react 18
@@ -45,20 +45,6 @@ yarn create react-app hello-webgpu --template typescript
 
 <br>
 
-你可能会发现尽管 react 是 18 了，但是 @types/react 和 @types/react-dom 却不是 18.0.0，所以我们再需要做一步升级操作。
-
-**升级某些依赖的版本：**
-
-> 由于目前 create-react-app 5.0.0 还并未完全适配 react18，所以才需要我们手工升级一下这些模块。
-
-```
-yarn add @types/react @types/react-dom typescript
-```
-
-
-
-<br>
-
 **可选操作：安装 node-sass**
 
 如果你不使用 sass，忽略这一步。
@@ -68,33 +54,6 @@ yarn add node-sass@6.0.0
 ```
 
 > 最新版的 node-sass 我这边一直安装不成功，所以选择安装 6.0.0 版本。
-
-
-
-<br>
-
-**修改index.tsx：**
-
-此时我们安装的是 react18，但是默认创建的 index.tsx 中还使用的是 react17 的代码，所以需要进行修改。
-
-所以我们直接将 index.tsx 代码修改为：
-
-```
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App'
-import './index.scss'
-
-const container = document.querySelector('#root')
-const root = createRoot(container as HTMLElement)
-root.render(
-    <StrictMode>
-        <App />
-    </StrictMode>
-)
-```
-
-> 或许不久之后 create-react-app 升级完全适配 react18 后就不需要这一步操作了。
 
 
 
@@ -127,10 +86,9 @@ yarn add @webgpu/types
 +        "target": "esnext",
 
 +        "paths": {
-+            "@/src/*": ["./src/*"],
 +            "@/components/*": ["./src/components/*"],
 +            "@/hooks/*": ["./src/hooks/*"],
-+            "@/wgsl/*": ["./src/wgsl/*"]
++            "@/shader/*": ["./src/shader/*"]
 +         },
 
 +        "typeRoots": [
@@ -231,10 +189,9 @@ import path from 'path'
 module.exports = {
     webpack: {
         alias: {
-            "@/src": path.resolve(__dirname, "src/"),
             "@/components": path.resolve(__dirname, "src/components/"),
             "@/hooks": path.resolve(__dirname, "src/hooks/"),
-            "@/wgsl": path.resolve(__dirname, "src/wgsl/")
+            "@/shader": path.resolve(__dirname, "src/shader/")
         },
         configure: {
             module: {
@@ -252,7 +209,7 @@ module.exports = {
 <br>
 至此，我们已经完成了整体项目的配置。
 
-在接下来写示例时，我们可以通过 `import xxx form './wgsl/xx.wgsl'` 这种方式引入 .wsgl 代码了。
+在接下来写示例时，我们可以通过 `import xxx form './shader/xx.wgsl'` 这种方式引入 .wsgl 代码了。
 
 
 
@@ -280,7 +237,7 @@ module.exports = {
 在 vite 中是通过 url 的 query 参数 `?raw` 来表明 .wgsl 文件类型的。
 
 ```
-import xxx from './wgsl/xx.wgsl?raw'
+import xxx from './shader/xx.wgsl?raw'
 ```
 
 > raw 这个词是本身翻译为 生肉，实际上就是指 “未经处理” 的原始数据
@@ -325,7 +282,7 @@ import xxx from './wgsl/xx.wgsl?raw'
 
 这里我们选择 谷歌金丝雀(canary)版浏览器。
 
-> 目前最新版为 102。
+> 目前最新版为 103。
 
 
 
