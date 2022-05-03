@@ -6,6 +6,12 @@
 
 <br>
 
+与本系列教程对应的示例代码仓库：https://github.com/puxiao/react-webgpu-samples
+
+
+
+<br>
+
 **说在前面的话：**
 
 首先关于绘制三角形，网上已经有一些相关教程(当然这些教程中的代码大同小异)。
@@ -63,6 +69,8 @@
 <br>
 
 > 我特别建议你先去看 Orillusion 出的那套 WebGPU 入门课程，之后再来阅读本文。
+>
+> 尤其是你使用 Vue 不使用 React 的，本文可能不太适合你。
 
 
 
@@ -82,9 +90,11 @@
 >
 > 1、目前最新版 create-react-app 5.0.1 已默认适配了 react 18，所以无需我们再手工修改 index.tsx
 >
-> 2、在配置 alias 时，将存放 .wgsl 文件目录由 /wgsl 改为 shader/，同时删除关于 @/src 的这条配置项
+> 2、在配置 alias 时，将存放 .wgsl 文件目录由 /wgsl 改为 shaders/，同时删除关于 @/src 的这条配置项
 
 > 本系列教程地址：https://github.com/puxiao/webgpu-tutorial
+>
+> 本系列教程示例地址：https://github.com/puxiao/react-webgpu-samples
 
 
 
@@ -101,6 +111,8 @@
 **useDevice：**
 
 > src/hooks/useDevice.ts
+>
+> 在线地址：https://github.com/puxiao/react-webgpu-samples/blob/main/src/hooks/useDevice.ts
 
 ```
 import { useEffect, useState } from "react"
@@ -172,6 +184,8 @@ const { adapter, device } = useDevice()
 **useWebGPU：**
 
 > src/hooks/useWebGPU.ts
+>
+> 在线地址：https://github.com/puxiao/react-webgpu-samples/blob/main/src/hooks/useWebGPU.ts
 
 ```
 import { useEffect, useState } from "react"
@@ -230,14 +244,17 @@ useWebGPU  内部代码讲解：
 
 <br>
 
-**主页面代码：App.tsx**
+**主页面代码：SimpleTrangle.tsx**
+
+> src/components/simple-trangle/index.tsx
+>
+> 在线地址：https://github.com/puxiao/react-webgpu-samples/blob/main/src/components/simple-triangle/index.tsx
 
 ```
 import { useEffect, useRef } from "react"
 import useWebGPU from "@/hooks/useWebGPU"
-import './App.scss'
 
-function App() {
+const SimpleTriangle = () => {
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const { adapter, device, canvas, context, format } = useWebGPU(canvasRef.current)
@@ -254,10 +271,10 @@ function App() {
     )
 }
 
-export default App
+export default SimpleTrangle
 ```
 
-App.tsx 内部代码讲解：
+SimpleTrangle.tsx 内部代码讲解：
 
 1. 定义 canvasRef 用于 勾住 画布元素
 
@@ -356,12 +373,11 @@ App.tsx 内部代码讲解：
 ```diff
 import { useEffect, useRef } from "react"
 import useWebGPU from "@/hooks/useWebGPU"
-import './App.scss'
 
-+ import vert from '@/shader/triangle.vert.wgsl'
-+ import frag from '@/shader/red.frag.wgsl'
++ import vert from '@/shaders/triangle.vert.wgsl'
++ import frag from '@/shaders/red.frag.wgsl'
 
-function App() {
+const SimpleTriangle = () => {
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const { adapter, device, canvas, context, format } = useWebGPU(canvasRef.current)
@@ -423,7 +439,7 @@ function App() {
     )
 }
 
-export default App
+export default SimpleTrangle
 ```
 
 
@@ -437,15 +453,17 @@ export default App
 <br>
 
 ```
-import vert from '@/shader/triangle.vert.wgsl'
-import frag from '@/shader/red.frag.wgsl'
+import vert from '@/shaders/triangle.vert.wgsl'
+import frag from '@/shaders/red.frag.wgsl'
 ```
 
 **引入 .wgsl 文件**
 
 尽管我们还没有系统学习 WGSL 语法，但看一下这 2 个 .wgsl 文件的内容，大致能猜出其含义。
 
-> src/shader/triangle.vert.wgsl
+> 特别强调：在 WGSL 中的数字是需要统一小数位的，如果你将下面代码中的 1.0 改为 1 ，那么程序是无法正常运行的。
+
+> src/shaders/triangle.vert.wgsl
 
 ```
 @stage(vertex)
@@ -470,9 +488,11 @@ fn main(@builtin(vertex_index) VertexIndex: u32) -> @builtin(position) vec4<f32>
 
 4. ` -> @builtin(position) vec4<f32>`：表示 main 函数的返回结果
 
-5. `var pos = array<vec2<f32>, 3>`：基于二维坐标，定义一个数组，这里的 pos 应该是 position(位置) 的简写
+5. `var pos = array<vec2<f32>, 3>`：基于二维坐标，定义一个数组，同时明确这个数组中的元素总个数 为 3
 
-   > 为什么是 二维坐标？这里隐藏了一个很大的知识点，这里的坐标实际上是纹理的 UV 坐标。如果你不知道什么是 UV 坐标，你可以把它简单理解为：这是一个平面纹理 的二维坐标(几何中的四象限)，原点(0,0) 位于这个平面的中心点，每一个坐标的 x,y 的取值范围为 -1.0 ~ 1.0。
+   > 这里的 pos 是 position(位置) 的简写
+
+   > 为什么是 二维坐标？这里隐藏了一个很大的知识点，这里的坐标实际上相当于纹理的 UV 坐标。如果你不知道什么是 UV 坐标，你可以把它简单理解为：这是一个平面纹理 的二维坐标(几何中的四象限)，原点(0,0) 位于这个平面的中心点，每一个坐标的 x,y 的取值范围为 -1.0 ~ 1.0。
    >
    > 也就是说左上角的坐标为 (-1.0,1.0)、右上角坐标为 (1.0,1.0)、左下角坐标为(-1.0,-1.0)、右下角的坐标为(1.0,-1.0)
 
@@ -486,7 +506,7 @@ fn main(@builtin(vertex_index) VertexIndex: u32) -> @builtin(position) vec4<f32>
 
 <br>
 
-> src/shader/red.frag.wgsl
+> src/shaders/red.frag.wgsl
 
 ```
 @stage(fragment)
@@ -525,8 +545,8 @@ context.configure(canvsConfig)
 <br>
 
 ```
-import vert from '@/shader/triangle.vert.wgsl'
-import frag from '@/shader/red.frag.wgsl'
+import vert from '@/shaders/triangle.vert.wgsl'
+import frag from '@/shaders/red.frag.wgsl'
 
 const pipeline = device.createRenderPipeline({
     vertex: {
@@ -586,8 +606,23 @@ const pipeline = device.createRenderPipeline({
 
 **延展变化：其他多边形**
 
-1. 假设我们把上面示例中的 `src/shader/triangle.vert.wgsl` 再增加 1 个点坐标，也就是一共有 4 个点坐标
-2. 同时将 `topology` 的值设置为  “triangle-strip”，那么我们最终将得到的是一个 四边形
+1. 假设我们把上面示例中的 `src/shaders/triangle.vert.wgsl` 再增加 1 个点坐标，也就是一共有 4 个点坐标
+
+   > 同时记得修改此处代码：
+   >
+   > ```diff
+   > - var pos = array<vec2<f32>, 3>
+   > + var pos = array<vec2<f32>, 4>
+   > ```
+
+2. 同时将 `topology` 的值设置为  “triangle-strip”，那么最终我们可能得到一个 四边形 或者其他图形(这取决于你这 4 个点的前后顺序)
+
+   > 同时记得修改此处代码：
+   >
+   > ```diff
+   > - passEncoder.draw(3, 1, 0, 0)
+   > + passEncoder.draw(4, 1, 0, 0)
+   > ```
 
 
 
@@ -600,25 +635,31 @@ draw()
 
 **开始绘制**
 
-1. `device.createCommandEncoder()`：创建一个命令编码器
+1. `device.createCommandEncoder()`：用同步的方法，创建一个命令编码器
+
+   > 与之对应的是 异步创建 的方法：device.createComputePipelineAsync()，这里我们暂时先选择使用同步的方法，若日后需要同时创建大量的 命令编码器时，我们再选择使用异步。
 
 2. `context.getCurrentTexture().createView()`：得到画布上下文中的纹理视图
 
 3. `const renderPassDescriptor: GPURenderPassDescriptor = { ... }`：创建初始化渲染通道编码器的配置项
 
-4. `commandEncoder.beginRenderPass(renderPassDescriptor)`：创建一个渲染通道编码器
+4. `clearValue: { r: 0, g: 0, b: 0, a: 1 }`：设置默认的背景色
 
-5. `passEncoder.setPipeline(pipeline)`：将之前创建的管线交给该渲染通道编码器
+   > 这里的 "clearValue" 表达的意思是 “当清空上一帧后，在绘制新的一帧之前 给整个场景所填充的颜色”
 
-6. `passEncoder.draw(3, 1, 0, 0)`：开始绘制
+5. `commandEncoder.beginRenderPass(renderPassDescriptor)`：创建一个渲染通道编码器
+
+6. `passEncoder.setPipeline(pipeline)`：将之前创建的管线交给该渲染通道编码器
+
+7. `passEncoder.draw(3, 1, 0, 0)`：开始绘制，其中第 1 个参数表明调用 "main" 这个函数的次数，后  3 个参数为可选参数，这里使用的是它们的默认值 “1,0,0”，实际上这行代码可以简写为 `passEncoder.draw(3)`
 
    > 这一步发生在 CPU 中，这里的绘制不是指 图形绘制，而是指针对 绘制命令的编码(转录)
 
-7. `passEncoder.end()`：结束绘制
+8. `passEncoder.end()`：结束绘制
 
-8. `device.queue.submit([commandEncoder.finish()])`：调用 命令编码器的 .finish() 方法完成编码，并将其返回值 命令缓冲区 交给 命令队列(GPUQueue)，并通过 .submit() 函数进行提交
+9. `device.queue.submit([commandEncoder.finish()])`：调用 命令编码器的 .finish() 方法完成编码，并将其返回值 命令缓冲区 交给 命令队列(GPUQueue)，并通过 .submit() 函数进行提交
 
-9. 接下来会在 显卡(GPU) 中开始真的 GPU 绘制，并将结果反映在 画布元素中
+10. 接下来会在 显卡(GPU) 中开始真的 GPU 绘制，并将结果反映在 画布元素中
 
 
 
@@ -700,3 +741,16 @@ return () =>{
 }
 ```
 
+
+
+<br>
+
+虽然此刻我们仅仅绘制了一个三角形，但是这其中的渲染流程中的细节非常多。一定要反复多敲代码几遍，将绘制流程熟记于心。
+
+好了，作为 WebGPU 实际入门的示例，绘制一个三角形，本文讲解到此结束。
+
+
+
+<br>
+
+接下来，我们将要学习如何动态更改这个三角形，例如 颜色，位置，大小等。

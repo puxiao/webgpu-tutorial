@@ -5,6 +5,12 @@
 
 <br>
 
+本系列教程对应的示例代码仓库：https://github.com/puxiao/react-webgpu-samples
+
+
+
+<br>
+
 **为什么要学习WebGPU？**
 
 * 十几年前 Flash 的出现颠覆了网页表现形式
