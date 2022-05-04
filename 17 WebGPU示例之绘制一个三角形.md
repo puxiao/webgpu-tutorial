@@ -642,9 +642,11 @@ draw()
 
 3. `const renderPassDescriptor: GPURenderPassDescriptor = { ... }`：创建初始化渲染通道编码器的配置项
 
-4. `clearValue: { r: 0, g: 0, b: 0, a: 1 }`：设置默认的背景色
+4. `clearValue: { r: 0, g: 0, b: 0, a: 1 }`：设置默认的背景色 (黑色)
 
    > 这里的 "clearValue" 表达的意思是 “当清空上一帧后，在绘制新的一帧之前 给整个场景所填充的颜色”
+   >
+   > 如果修改为 `clearValue: { r: 1, g: 1, b: 1, a: 1 }`，那么背景色将会为 纯白色
 
 5. `commandEncoder.beginRenderPass(renderPassDescriptor)`：创建一个渲染通道编码器
 
