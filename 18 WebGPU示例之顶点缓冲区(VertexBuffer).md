@@ -278,7 +278,7 @@ const vertexBuffer = device.createBuffer({
 ```
 
 > 1. GPUBufferUsage.VERTEX：表明该缓冲区是应用于 顶点阶段
-> 2. GPUBufferUsage.COPY_DST：表明该缓冲区是可以作为拷贝源，也就是说可以被 读取
+> 2. GPUBufferUsage.COPY_DST：表明该缓冲区是可以作为拷贝目的地(destination)，也就是说可以被 写入
 
 
 
@@ -437,7 +437,7 @@ const pipeline = device.createRenderPipeline({
 
 <br>
 
-至此，已经完整得讲解了一遍 如何在 JS 中定义顶点坐标，并将坐标传递给 WGSL 顶点着色器入口函数中。
+至此，已经讲解了一遍 如何在 JS 中定义顶点坐标，并将坐标传递给 WGSL 顶点着色器入口函数中。
 
 
 
