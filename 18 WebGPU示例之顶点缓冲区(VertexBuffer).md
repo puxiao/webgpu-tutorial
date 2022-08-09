@@ -114,6 +114,8 @@ fn main(@builtin(vertex_index) VertexIndex: u32) -> @builtin(position) vec4<f32>
    >
    > 在顶点渲染阶段，每一次读取一个顶点信息，内置值 vertex_index 都会自动 + 1
 
+   > 关于内置值 vertex_index，它特别像 JS 数组循环方法中的索引下标(index)，例如 `['a','b','c'].map((item, index) => { ... })` 中的 index
+
 5. `-> @builtin(position) vec4<f32>`：表明入口函数 main 每次调度后都会返回内置值 position，且它的类型为  `vec4<f32>`
 
    > `vec4<f32>`：由 4 个分量组成的一个齐次坐标，每一个分量的类型都是 f32 (32位浮点数)
@@ -381,6 +383,10 @@ const pipeline = device.createRenderPipeline({
 + passEncoder.setVertexBuffer(0,vertexBuffer)
 ```
 
+> 上述代码中 setVertexBuffer() 中的第 1 个参数值 0 是指插槽的索引值，第 2 个参数 vertexBuffer 就是这个插槽中对应的 缓冲区数据。
+>
+> 特别强调：一个插槽可以包含多个参数值，上述代码中的 插槽索引值 为 0 并不意味着第 2 个参数 vertexBuffer 一定 100% 只对应入口函数的第 1 个参数，vertexBuffer 中的数据还有可能包含入口函数的第 2 个，第 3 个 ... 第 n 个参数。
+
 
 
 <br>
@@ -558,5 +564,7 @@ fn main(@location(0) pos:vec2<f32>) -> @builtin(position) vec4<f32>{
 
 <br>
 
-本文到此结束，下一节我们讲解另外一种传递数据到着色器的方式。
+本文到此结束，下一节我们将讲解一下 顶点缓冲区 如何传递多个参数 。
+
+可以把它当做是对本文的一个补充。
 
