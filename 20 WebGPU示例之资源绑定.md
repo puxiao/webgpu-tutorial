@@ -144,8 +144,8 @@ usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
 
 **与 UNIFORM 相近的是 STORAGE：**
 
-1. 统一缓冲区(uniform buffer) 最大可用上限为 64K，在 着色器内部 为只读模式
-2. 存储缓冲区(storage buffer) 最大可用上限为 2G，在 着色器内部 可读可写
+1. 统一缓冲区(uniform buffer) 最大可用上限为 64K，在 着色器内部为 只读模式
+2. 存储缓冲区(storage buffer) 最大可用上限为 2G，在 着色器内部为 可读可写模式
 
 
 
