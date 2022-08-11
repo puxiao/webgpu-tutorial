@@ -130,13 +130,13 @@ usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
 **与 UNIFORM 相近的是 STORAGE：**
 
 1. 统一缓冲区(uniform buffer) 最大可用上限为 64K
-2. 存储缓冲区(storage buffer) 最大可用上线为 2G
+2. 存储缓冲区(storage buffer) 最大可用上限为 2G
 
 
 
 <br>
 
-> 我们今天只学习 统一缓冲区，GPUBufferUsage.STORAGE 先不做讲解。
+> 我们今天只学习 统一缓冲区，至于 GPUBufferUsage.STORAGE 先不做讲解。
 
 
 
@@ -169,7 +169,7 @@ usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
 **绑定组与渲染管线(GPURenderPipeline)关联的时机：**
 
 1. 顶点缓冲区是在创建渲染管线时，通过配置管线描述的 vertex: { buffers : [ ... ]} 来进行关联的。
-2. 绑定组则是在 渲染管线创建完成后，通过 device.createBindGroup( { layout: ... }) 中的描述配置与渲染管线进行关联的。
+2. 绑定组则是在 渲染管线创建完成后才开始创建的，要绑定的资源 通过 device.createBindGroup( { layout: ... }) 中的描述配置与渲染管线进行关联。
 
 
 
@@ -177,7 +177,7 @@ usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
 
 **创建资源绑定组的完整代码：**
 
-> 假设 pipeline 为我们已经创建好的渲染管线
+> 假设 pipeline 是我们已经创建好的渲染管线
 
 ```
 const bindGroup = device.createBindGroup({
