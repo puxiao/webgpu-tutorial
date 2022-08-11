@@ -28,7 +28,7 @@ const canvsConfig: GPUCanvasConfiguration = {
 context.configure(canvsConfig)
 ```
 
-在初始化配置 GPU画布上下文(GPUCanvasContext) 时，无需再显示添加 size 属性。
+在初始化配置 GPU画布上下文(GPUCanvasContext) 时，无需再显式添加 size 属性。
 
 默认情况下 WebGPU 会直接使用 `<canvas>` 标签上添加的 width 、height 属性值。
 
@@ -348,4 +348,4 @@ fn main(@location(0) xy: vec2<f32>, @location(1) z: f32) -> @builtin(position) v
 
 至此，我们已经搞清楚了 如何传递数据到 顶点(vertex)渲染阶段。
 
-本文到此结束，下一节我们将学习另外一种传递数据到 WGSL 中的方式：资源绑定
+本文到此结束，下一节我们将学习另外一种传递数据到 WGSL 中的方式：绑定组
