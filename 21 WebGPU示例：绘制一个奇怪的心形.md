@@ -21,7 +21,7 @@
 
 先看最终绘制的结果：
 
-![heart_shape.jpg](https://github.com/puxiao/webgpu-tutorial/blob/main/imgs/heart_shape.jpg?raw=true)
+![heart_shape.jpg](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/heart_shape.jpg)
 
 
 
@@ -41,7 +41,7 @@
 
 因为生成这个心形的坐标公式中，稍微修改其中几个系数大小，那么得到的就不是心形，而是下面一些很奇怪的图形。
 
-![heart_shape2.jpg](https://github.com/puxiao/webgpu-tutorial/blob/main/imgs/heart_shape2.jpg?raw=true)
+![heart_shape2.jpg](https://raw.githubusercontent.com/puxiao/webgpu-tutorial/main/imgs/heart_shape2.jpg)
 
 
 
@@ -75,7 +75,7 @@ y = 2a(2*cos(θ) - cos(2θ))
 
 > 直角坐标系，创始人是 笛卡尔，直角坐标系也被称为 笛卡尔坐标系。
 >
-> 而 极坐标 的创始人是牛顿。
+> 极坐标 的创始人是牛顿。
 
 
 
