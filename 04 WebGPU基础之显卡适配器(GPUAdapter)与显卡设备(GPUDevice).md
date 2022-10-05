@@ -164,6 +164,70 @@ const device = await adapter.requestDevice()
 
 <br>
 
+**关于 requestAdapter() 参数补充详情：**
+
+我们可以通过添加参数，明确我们希望得到什么样的适配器，进而下一步得到什么类型的显卡设备。
+
+1. 不使用参数 或 参数为 undefined
+
+   ```
+   navigator.gpu.requestAdapter()
+   ```
+
+   此时返回的是默认的显卡适配器( adapter )。
+
+2. 使用参数 `options?: GPURequestAdapterOptions`
+
+   ```
+   //返回一个性能相对不高，但是耗电量较低的显卡设备，通常暗指 集成显卡
+   navigator.gpu.requestAdapter({ powerPreference: 'low-power' })
+   ```
+
+   ```
+   //返回一个性能相对较高，同时耗电量也高的显卡设备，通常暗指 独立显卡
+   navigator.gpu.requestAdapter({ powerPreference: 'high-performance' })
+   ```
+
+   请注意，尽管我们可以这样添加参数，以希望得到不同的显卡设备适配器，但是这个前提是我们的系统中本身包含不同的显卡设备。
+
+   假设我的电脑系统中只有集成显卡，根本没有独立显卡，那么此时即使我们添加有参数 `{ powerPreference: 'high-performance' }`，但是 GPUAdapter(显卡适配器) 依然会返回的是 集成显卡对应的适配器。
+
+
+
+<br>
+
+> 更新于 2022.10.05：关于 powerPreference 之前写错了，感谢网友 `走出个虎虎生风` 指出该处错误。
+
+
+
+<br>
+
+**什么时候使用不同的参数？**
+
+假设我们的网页或应用此时并不需要特别高的渲染或通用计算，那么 WebGPU 官方是推荐和鼓励我们采用 `powerPreference: 'low-power'` 这个参数，这样有可能降低系统的耗电量，尤其是针对笔记本电脑。
+
+
+
+<br>
+
+**requestDevice() 的配置参数：**
+
+```
+adapter.requestDevice({ ... })
+```
+
+1. requiredFeatures：对显卡设备的一些特征描述，如果当前系统中不能满足 requiredFeatures 的一些特征描述，则不能正确返回显卡设备
+2. requiredLimits：对显卡设备的一些最低限制要求，如果当前系统中不能满足 requiredLimits 的一些要求，则不能正确返回显卡设备
+3. defaultQueue：默认的命令队列(GPUQueue)的配置描述
+
+> 我们暂时不用去细究上面这些配置参数具体含义。
+
+> 对于绝大多数 WebGPU 应用场景，我们都无需对 requestAdapter()、requestDevice() 添加参数。
+
+
+
+<br>
+
 下面将具体讲解一下 GPUAdapter 和 GPUDevice 的属性和方法。
 
 但是请注意，下面讲解的属性和方法采用的是 `@webgpu/types` 0.1.9 版本中定义的 WebGPU 属性和方法。
@@ -195,46 +259,6 @@ const device = await adapter.requestDevice()
 | 方法            | 对应作用                    |
 | --------------- | --------------------------- |
 | requestDevice() | 异步返回一个 GPUDevice 实例 |
-
-
-
-<br>
-
-**requestDevice() 参数详情：**
-
-我们可以通过添加参数，告诉适配器我们希望得到什么样的 GPUDevice(显卡设备)。
-
-1. 不使用参数 或 参数为 undefined
-
-   ```
-   adapter.requestDevice()
-   ```
-
-   此时 显卡适配器( adapter )会返回一个默认的 显卡设备实例( GPUDevice )。
-
-2. 使用参数 `descriptor?: GPUDeviceDescriptor`
-
-   ```
-   //返回一个性能相对不高，但是耗电量较低的显卡设备，通常是指 集成显卡
-   adapter.requestDevice({ powerPreference: 'low-power' })
-   ```
-
-   ```
-   //返回一个性能相对较高，同时耗电量也高的显卡设备，通常是指 独立显卡
-   adapter.requestDevice({ powerPreference: 'high-performance' })
-   ```
-
-   请注意，尽管我们可以这样添加参数，以希望得到不同的显卡设备，但是这个前提是我们的系统中本身就包含不同的显卡设备。
-
-   假设我的电脑系统中只有集成显卡，根本没有独立显卡，那么此时即使我们添加有参数 `{ powerPreference: 'high-performance' }`，但是 GPUAdapter(显卡适配器) 依然会返回的是 集成显卡。
-
-
-
-<br>
-
-**什么时候使用不同的参数？**
-
-假设我们的网页或应用此时并不需要特别高的渲染或通用计算，那么 WebGPU 官方是推荐和鼓励我们采用 `powerPreference: 'low-power'` 这个参数，这样有可能降低系统的耗电量，尤其是针对笔记本电脑。
 
 
 
@@ -289,3 +313,4 @@ const device = await adapter.requestDevice()
 在后续的文章中，我们会逐一学习上面方法中涉及到的各个类，例如 GPUQueue、GPUBuffer、GPUTexture、GPUSampler...
 
 本文到此结束。
+
