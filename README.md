@@ -16,6 +16,11 @@
 仓库地址：https://github.com/puxiao/wgsl-tutorial
 
 
+<br>
+<p align="center">
+<img src="https://raw.githubusercontent.com/puxiao/notes/master/imgs/wechat.jpg" alt="wechat.jpg"/>
+</p>
+
 
 <br>
 
